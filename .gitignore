@@ -11,3 +11,7 @@ __pycache__/
 
 # Hydra experiments folder
 /experiments
+
+# Pybind files
+/src/cpp/pybind11
+/src/cmake_example.cpython-311-x86_64-linux-gnu.so

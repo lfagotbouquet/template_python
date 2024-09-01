@@ -1,0 +1,4 @@
+fire
+hydra-core
+pre-commit
+pytest

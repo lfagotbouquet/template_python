@@ -1,0 +1,22 @@
+services:
+  project_name:
+    image: project_name
+    container_name: project_name_container
+    build:
+      context: .
+      args:
+        UID: ${HOST_UID}
+        GID: ${HOST_GID}
+        USERNAME: ${HOST_USERNAME}
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    command: sleep infinity
+    volumes:
+      - ..:/workspace/PROJECT_NAME
+      - ${HOST_SSH_FOLDER}:/home/${HOST_USERNAME}/.ssh:ro
+      - ${HOST_GITCONFIG_FILE}:/home/${HOST_USERNAME}/.gitconfig:ro

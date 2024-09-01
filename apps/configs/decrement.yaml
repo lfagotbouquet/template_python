@@ -1,0 +1,7 @@
+experiment_name: decrement
+
+value: 2
+
+hydra:
+  run:
+    dir: experiments/${now:%Y-%m-%d_%H-%M-%S}_${experiment_name}

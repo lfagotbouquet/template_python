@@ -1,0 +1,13 @@
+.python-version
+__pycache__/
+*.egg-info/
+.idea/
+
+# Pytest cache
+.pytest_cache
+
+# Virtual env
+/.venv
+
+# Hydra experiments folder
+/experiments

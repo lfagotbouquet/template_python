@@ -1,4 +1,4 @@
 fire
 hydra-core
-pre-commit
+pre-commit<4
 pytest

@@ -55,7 +55,7 @@ You can follow the step-by-step procedure described in the next section instead 
 what you really want to install for this project.
 
 In the root folder of this project, run `make` to install all the dependencies required.
-Then, run `source .venv/bin/activate` to install the local Python virtual environment install in the `.venv` subfolder.
+Then, run `source .venv/bin/activate` to install the local Python virtual environment in the `.venv` subfolder.
 NOTE: This virtual environment can be deactivated by running the command `deactivate`.
 
 Eventually, run `source ~/.bashrc` to initialize pyenv in the current shell.

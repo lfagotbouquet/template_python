@@ -1,2 +1,44 @@
-[tool.isort]
-profile = "black"
+[tool.ruff]
+# Core linting + formatting
+line-length = 88
+target-version = ["py39", "py310", "py311", "py312"]
+fix = true
+select = ["ALL"]
+extend-ignore = [
+    "E203",  # Conflicts with line break before ':' in slices (Black style)
+    "W503"   # Line break before binary operator (Black style)
+]
+src = ["src", "apps", "tests"]
+
+[tool.docformatter]
+# Auto-format docstrings
+wrap-summaries = 88
+pre-summary-newline = true
+make-summary-multi-line = true
+recursive = true
+
+[tool.mypy]
+# Type checking
+ignore_missing_imports = true
+no_error_summary = true
+pretty = true
+install_types = true
+files = "src,apps,tests"
+
+[tool.bandit]
+# Security static analysis
+targets = ["src", "apps"]
+confidence-level = "medium"
+quiet = true
+
+[tool.yamllint]
+# YAML linter config for docker/configs etc.
+extends = "default"
+rules.line-length.max = 120
+rules.document-start = false
+
+[tool.prettier]
+# Optional formatting for Markdown/JSON/YAML
+single-quote = true
+trailing-comma = "all"
+print-width = 88

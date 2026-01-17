@@ -1,13 +1,41 @@
+# Byte-compiled / optimized / DLL files
 .python-version
 __pycache__/
 *.egg-info/
 .idea/
+dist/
+build/
+.vscode/
+*.pyc
+*.pyo
+*.pyd
 
 # Pytest cache
 .pytest_cache
 
+# Mypy cache
+.mypy_cache/
+
+# Pytest cache
+.pytest_cache/
+
+# Ruff cache
+.ruff_cache/
+
+# Coverage reports
+htmlcov/
+.coverage
+.coverage.*
+cov.xml
+nosetests.xml
+coverage.xml
+*.cover
+
 # Virtual env
 /.venv
+# Env folder
+/env
+.venv/
 
 # Hydra experiments folder
 /experiments

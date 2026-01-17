@@ -11,7 +11,7 @@ for this project if needed as explained in the next section.
 ### Docker (optional)
 
 Prerequisites: Docker engine and Nvidia container toolkit.\
-Follow instructions here: https://docs.nvidia.com/ai-enterprise/deployment-guide-vmware/0.1.0/docker.html
+Follow instructions here: <https://docs.nvidia.com/ai-enterprise/deployment-guide-vmware/0.1.0/docker.html>
 
 A Dockerfile and a `compose.yaml` file are provided in the subfolder `docker` to
 eventually create a Docker container for this project.
@@ -40,7 +40,7 @@ Notes:
 
 - In the Dockerfile, you eventually need to change the version of the nvidia image
   based on the nvidia driver version of your machine.\
-  Check https://docs.nvidia.com/deploy/cuda-compatibility/ for more explanations.
+  Check <https://docs.nvidia.com/deploy/cuda-compatibility/> for more explanations.
 
 ### System requirements
 
@@ -104,7 +104,7 @@ Install the Python project package in editable mode using
 
 To install and use pre-commit hooks, run
 
-```
+```bash
 pre-commit install
 pre-commit install-hooks
 ```

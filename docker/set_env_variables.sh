@@ -1,14 +1,25 @@
-# Retrieve host's name, uid and gid
-export HOST_UID=$(id -u)
-export HOST_GID=$(id -g)
-export HOST_USERNAME=$(whoami)
+#!/bin/bash
+# shellcheck shell=bash
 
-export HOST_SSH_FOLDER=
-if [ -d ~/.ssh ]; then
-    export HOST_SSH_FOLDER="~/.ssh"
-fi
+# Retrieve host UID, GID, and username
+HOST_UID=$(id -u)
+HOST_GID=$(id -g)
+HOST_USERNAME=$(whoami)
 
-export HOST_GITCONFIG_FILE=
-if [ -f ~/.gitconfig ]; then
-    export HOST_GITCONFIG_FILE="~/.gitconfig"
+export HOST_UID
+export HOST_GID
+export HOST_USERNAME
+
+# Host SSH folder
+HOST_SSH_FOLDER=""
+if [ -d "$HOME/.ssh" ]; then
+	HOST_SSH_FOLDER="$HOME/.ssh"
 fi
+export HOST_SSH_FOLDER
+
+# Host Git config file
+HOST_GITCONFIG_FILE=""
+if [ -f "$HOME/.gitconfig" ]; then
+	HOST_GITCONFIG_FILE="$HOME/.gitconfig"
+fi
+export HOST_GITCONFIG_FILE

@@ -108,3 +108,14 @@ To install and use pre-commit hooks, run
 pre-commit install
 pre-commit install-hooks
 ```
+
+### Project Governance Files
+
+These files establish norms, processes, and expectations for contributors and maintainers. Customize as needed per project scope.
+
+- **`CONTRIBUTING.md`** – Outlines how to submit code, report bugs, and propose features. *Must be tailored* to the project’s workflow.
+- **`CODE_OF_CONDUCT.md`** – Sets behavioral standards for all participants. *Generally reusable* across projects.
+- **`SECURITY.md`** – Provides instructions for reporting vulnerabilities responsibly. *Typically reusable* without modification.
+- **`CHANGELOG.md`** – Tracks notable changes per release, following [Keep a Changelog](https://keepachangelog.com/). *Must be maintained* per project.
+- **`SUPPORT.md`** – Directs users to appropriate help channels (e.g., issues, forums). *Must be customized* with project-specific resources.
+- **`GOVERNANCE.md`** – Defines decision-making processes, roles, and maintainer responsibilities. *Primarily intended for large or enterprise projects*; may be removed for personal or academic use.

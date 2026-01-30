@@ -1,121 +1,238 @@
-# Base Python template
+# Base Python Template
+
+![Python](https://img.shields.io/badge/python-3.11.9-blue.svg)
+![License](https://img.shields.io/badge/license-MIT-green.svg)
+![Platform](https://img.shields.io/badge/platform-Linux-lightgrey.svg)
+
+A ready-to-use, plug-and-play Python project template with pre-configured tooling for code quality, security analysis, and containerization.
+
+## Features
+
+- **Code Quality**: Pre-commit hooks with Ruff (linting + formatting), Mypy (type checking), and Docformatter
+- **Security**: Automated security scanning with Bandit
+- **Shell Scripts**: Linting with shfmt and ShellCheck
+- **Commit Standards**: Conventional commit message enforcement
+- **Containerization**: Docker support with optional GPU/NVIDIA capabilities
+- **Environment Management**: Pyenv + venv for reproducible Python environments
+- **CI Integration**: Pre-commit.ci ready with auto-fix and weekly updates
+- **Governance**: Ready-to-use templates for open source collaboration
+
+---
+
+## Table of Contents
+
+- [Quick Start](#quick-start)
+- [Installation](#installation)
+  - [System Requirements](#system-requirements)
+  - [Full Installation (make)](#full-installation-using-make)
+  - [Step-by-Step Installation](#step-by-step-installation)
+- [Docker Setup (Optional)](#docker-setup-optional)
+- [Project Structure](#project-structure)
+- [Pre-commit Hooks](#pre-commit-hooks)
+- [Project Governance Files](#project-governance-files)
+
+---
+
+## Quick Start
+
+For users who want to get started quickly:
+
+```bash
+# Install system dependencies (requires sudo)
+./install_scripts/install_system_requirements.sh
+
+# Install everything with make
+make
+
+# Activate the virtual environment
+source .venv/bin/activate
+
+# You're ready to go!
+```
+
+---
 
 ## Installation
 
-Note: This project is supposed to be installed on Linux systems, and was only
-tested on Ubuntu 22.04 with Python 3.11.9\
-You will need a sudo user to install some system dependencies for this project.\
-A Dockerfile is provided in the subfolder `docker` to build an ubuntu-based image
-for this project if needed as explained in the next section.
+> **Note:** This project is designed for Linux systems and has been tested on Ubuntu 22.04/24.04 with Python 3.11/3.12/3.13.
 
-### Docker (optional)
+### System Requirements
 
-Prerequisites: Docker engine and Nvidia container toolkit.\
-Follow instructions here: <https://docs.nvidia.com/ai-enterprise/deployment-guide-vmware/0.1.0/docker.html>
+Install the system dependencies for this project:
 
-A Dockerfile and a `compose.yaml` file are provided in the subfolder `docker` to
-eventually create a Docker container for this project.
+```bash
+./install_scripts/install_system_requirements.sh
+```
 
-Run `./docker/create.sh` to build the related image, run the container in background
-and get an interactive bash session in the container.\
-This session can be exited by typing `exit`.\
-A new interactive bash session can be launched by running `./docker/exec.sh`.\
-Finally, the created image and containers can be removed with the script `./docker/remove.sh`.
+> **Note:** You need sudo access for this step.
 
-Notes:
+### Full Installation Using make
 
-- The scripts require that the host machine is using Ubuntu with bash installed.\
-  But the provided Dockerfile and `compose.yaml` file can be used on other operating systems.\
-  In that case, you need to set some environment variables for the `compose.yaml` file (the ones set
-  by the script `set_env_variables.sh`).
+> **Warning:** This procedure will install pyenv for your user account. See [Step-by-Step Installation](#step-by-step-installation) if you prefer more control over what gets installed.
 
-- Inside the created container, a sudo user will be created with the same username, uid
-  and gid as your user on the host machine.\
-  This makes possible to read and write files inside the Docker container without permission issues.\
-  The eventual `~/.ssh` folder and `~/.gitconfig` file are also mounted (read-only) in the container
-  to allow working on the project with git (to pull and push branches/commits from/to the git remote).\
-  An error will be raised if no `~/.ssh` folder or `~/.gitconfig` file is found on the host machine.\
-  In that case, remove the related volumes from the `compose.yaml` file to create a container
-  without having the host ssh folder and/or .gitconfig file mounted.
+1. Run the installation:
 
-- In the Dockerfile, you eventually need to change the version of the nvidia image
-  based on the nvidia driver version of your machine.\
-  Check <https://docs.nvidia.com/deploy/cuda-compatibility/> for more explanations.
+   ```bash
+   make
+   ```
 
-### System requirements
+2. Activate the virtual environment:
 
-Run `./install_scripts/install_system_requirements.sh` to install the system dependencies for
-this project.\
-NOTE: You need to have a sudo user for this.
+   ```bash
+   source .venv/bin/activate
+   ```
 
-### Full installation using make
+3. Initialize pyenv in your current shell (if needed):
 
-WARNING: This installation procedure will install pyenv for your user account.\
-You can follow the step-by-step procedure described in the next section instead if you prefer to select
-what you really want to install for this project.
+   ```bash
+   source ~/.bashrc
+   ```
 
-In the root folder of this project, run `make` to install all the dependencies required.
-Then, run `source .venv/bin/activate` to install the local Python virtual environment in the `.venv` subfolder.
-NOTE: This virtual environment can be deactivated by running the command `deactivate`.
+> **Tip:** Deactivate the virtual environment anytime by running `deactivate`.
 
-Eventually, run `source ~/.bashrc` to initialize pyenv in the current shell.
+### Step-by-Step Installation
 
-### Step-by-step install
+Skip this section if you used the `make` command above.
 
-NOTE: You can skip this section if you installed the project as explained in the previous section
-with the `make` command.
+#### 1. Set Up Virtual Environment (pyenv + venv)
 
-#### Local virtual environment using pyenv and venv
+It is strongly recommended to use a virtual Python environment. This guide uses pyenv and venv, but alternatives like virtualenv, pyenv-virtualenv, or miniconda also work.
 
-It is strongly advised to use a virtual Python environment to install this project.\
-The approach described here relies on pyenv and venv, but other tools can also be
-considered (virtualenv, pyenv-virtualenv, miniconda...).
+**Install pyenv:**
 
-Run `curl https://pyenv.run | bash` to install pyenv.\
-Follow the instructions displayed at the end of this script to update your `~/.bashrc` file
-(or equivalent file depending on your shell).
-Restart your shell or run `source ~/.bashrc` to initialize pyenv in the current shell.
+```bash
+curl https://pyenv.run | bash
+```
 
-In the root folder of this project, run
+Follow the instructions displayed to update your `~/.bashrc` (or equivalent shell config), then restart your shell or run:
 
-`pyenv install 3.11.9 && pyenv local 3.11.9 && python -m venv .venv && pyenv local --unset`
+```bash
+source ~/.bashrc
+```
 
-to install Python 3.11.9 with pyenv and to create a local Python 3.11.9 environment in a .venv folder.
+**Create the virtual environment:**
 
-Activate this environment using
+```bash
+pyenv install 3.11.9 && pyenv local 3.11.9 && python -m venv .venv && pyenv local --unset
+```
 
-`source .venv/bin/activate`
+**Activate the environment:**
 
-NOTE: This virtual environment can be deactivated by running the command `deactivate`.
+```bash
+source .venv/bin/activate
+```
 
-#### Python dependencies
+#### 2. Install Python Dependencies
 
-Install the Python dependencies of this project with
+```bash
+pip install -r requirements.txt
+```
 
-`pip install -r requirements.txt`
+#### 3. Install Project Package (Editable Mode)
 
-#### Project package editable install
+```bash
+pip install -e .
+```
 
-Install the Python project package in editable mode using
-
-`pip install -e .`
-
-#### Pre-commit install
-
-To install and use pre-commit hooks, run
+#### 4. Set Up Pre-commit Hooks
 
 ```bash
 pre-commit install
 pre-commit install-hooks
 ```
 
-### Project Governance Files
+---
 
-These files establish norms, processes, and expectations for contributors and maintainers. Customize as needed per project scope.
+## Docker Setup (Optional)
 
-- **`CONTRIBUTING.md`** – Outlines how to submit code, report bugs, and propose features. *Must be tailored* to the project’s workflow.
-- **`CODE_OF_CONDUCT.md`** – Sets behavioral standards for all participants. *Generally reusable* across projects.
-- **`SECURITY.md`** – Provides instructions for reporting vulnerabilities responsibly. *Typically reusable* without modification.
-- **`CHANGELOG.md`** – Tracks notable changes per release, following [Keep a Changelog](https://keepachangelog.com/). *Must be maintained* per project.
-- **`SUPPORT.md`** – Directs users to appropriate help channels (e.g., issues, forums). *Must be customized* with project-specific resources.
-- **`GOVERNANCE.md`** – Defines decision-making processes, roles, and maintainer responsibilities. *Primarily intended for large or enterprise projects*; may be removed for personal or academic use.
+Docker support is provided for containerized development, with optional NVIDIA GPU support.
+
+### Prerequisites
+
+- Docker Engine
+- NVIDIA Container Toolkit (only if using GPU features)
+
+For GPU setup, follow: <https://docs.nvidia.com/ai-enterprise/deployment-guide-vmware/0.1.0/docker.html>
+
+> **Note:** GPU/NVIDIA support is optional. The Docker setup works without it for CPU-only workloads.
+
+### Usage
+
+| Command | Description |
+|---------|-------------|
+| `./docker/create.sh` | Build image, start container, open interactive shell |
+| `./docker/exec.sh` | Open a new shell in the running container |
+| `./docker/remove.sh` | Remove the image and containers |
+
+Exit the container shell by typing `exit`.
+
+### Important Notes
+
+- **Cross-platform compatibility:** The helper scripts require Ubuntu with bash. On other operating systems, use the `Dockerfile` and `compose.yaml` directly, setting the environment variables from `set_env_variables.sh` manually.
+
+- **User permissions:** The container creates a sudo user matching your host machine's username, UID, and GID. This prevents permission issues when reading/writing files.
+
+- **Git integration:** Your `~/.ssh` folder and `~/.gitconfig` are mounted read-only in the container for git operations. If these don't exist on your host, remove the related volumes from `compose.yaml`.
+
+- **NVIDIA driver compatibility:** If using GPU features, you may need to update the NVIDIA image version in the Dockerfile based on your driver version. See: <https://docs.nvidia.com/deploy/cuda-compatibility/>
+
+---
+
+## Project Structure
+
+```text
+.
+├── src/                  # Source code (your library/package)
+├── apps/                 # Application entry points and scripts
+│   └── configs/          # Application configuration files
+├── tests/                # Test suite
+├── docker/               # Docker configuration files
+│   ├── Dockerfile
+│   ├── compose.yaml
+│   └── *.sh              # Helper scripts
+├── install_scripts/      # System setup scripts
+├── .github/              # GitHub governance and workflow files
+├── .pre-commit-config.yaml
+├── pyproject.toml        # Project and tool configuration
+├── requirements.txt
+└── Makefile
+```
+
+---
+
+## Pre-commit Hooks
+
+This template includes a comprehensive set of pre-commit hooks:
+
+| Category | Tools | Purpose |
+|----------|-------|---------|
+| **Core Hygiene** | pre-commit-hooks | Trailing whitespace, EOF fixes, YAML/TOML/JSON validation, merge conflict detection, private key detection |
+| **Python Linting** | Ruff | Fast linting and auto-formatting (replaces Black, isort, Flake8) |
+| **Type Checking** | Mypy | Static type analysis |
+| **Security** | Bandit | Security vulnerability scanning |
+| **Docstrings** | Docformatter | Auto-format docstrings |
+| **Shell Scripts** | shfmt, ShellCheck | Shell script formatting and linting |
+| **Commits** | conventional-pre-commit | Enforce conventional commit messages |
+| **Markdown** | markdownlint | Markdown formatting |
+| **YAML** | yamllint | YAML validation |
+
+Run all hooks manually:
+
+```bash
+pre-commit run --all-files
+```
+
+---
+
+## Project Governance Files
+
+These files establish norms, processes, and expectations for contributors and maintainers. Customize as needed for your project scope.
+
+| File | Purpose | Customization |
+|------|---------|---------------|
+| `CONTRIBUTING.md` | How to submit code, report bugs, propose features | **Must be tailored** to your workflow |
+| `CODE_OF_CONDUCT.md` | Behavioral standards for participants | Generally reusable |
+| `SECURITY.md` | Instructions for reporting vulnerabilities | Typically reusable |
+| `CHANGELOG.md` | Notable changes per release ([Keep a Changelog](https://keepachangelog.com/)) | **Must be maintained** |
+| `SUPPORT.md` | Help channels (issues, forums, etc.) | **Must be customized** |
+| `GOVERNANCE.md` | Decision-making processes and roles | For large/enterprise projects; may be removed for personal use |

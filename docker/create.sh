@@ -12,4 +12,4 @@ source set_env_variables.sh
 docker compose up -d
 
 # Get an interactive bash session in the container
-docker compose exec project_name bash
+docker compose exec template_project bash

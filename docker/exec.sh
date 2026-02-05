@@ -9,4 +9,4 @@ cd "$(dirname "$0")" || exit
 source set_env_variables.sh
 
 # Get an interactive bash session
-docker compose exec project_name bash
+docker compose exec template_project bash

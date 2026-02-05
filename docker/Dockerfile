@@ -15,4 +15,4 @@ RUN apt update && \
     echo "$USERNAME ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
 USER $USERNAME
-WORKDIR /workspace/PROJECT_NAME
+WORKDIR /workspace/template_project

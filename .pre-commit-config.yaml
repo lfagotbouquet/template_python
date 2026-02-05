@@ -4,7 +4,6 @@
 # - Python linting + formatting (Ruff)
 # - Typing checks (Mypy)
 # - Security checks (Bandit)
-# - Docstring auto-formatting (Docformatter)
 # - Docs build smoke test
 # - Commit message enforcement
 # - Shell script linting (shfmt + shellcheck)
@@ -43,14 +42,6 @@ repos:
 
       - id: ruff-format
         types_or: [python, pyi]
-
-  # ---------- DOCSTRING AUTO-FIX (Docformatter) ----------
-  - repo: https://github.com/PyCQA/docformatter
-    rev: v1.7.7
-    hooks:
-      - id: docformatter
-        args: [--in-place, --recursive, --wrap-summaries=88]
-        types_or: [python]
 
   # ---------- TYPES (MYPY) ----------
   - repo: https://github.com/pre-commit/mirrors-mypy
@@ -125,11 +116,7 @@ repos:
     rev: v1.38.0
     hooks:
       - id: yamllint
-        args:
-          [
-            -d,
-            "{extends: default, rules: {line-length: {max: 120}, document-start: disable}}",
-          ]
+        args: [--config-file=.yamllint]
 
 # ---------- CI / PRE-COMMIT.CI CONFIG ----------
 ci:

@@ -1,7 +1,7 @@
 services:
-  project_name:
-    image: project_name
-    container_name: project_name_container
+  template_project:
+    image: template_project
+    container_name: template_project_container
     build:
       context: .
       args:
@@ -17,6 +17,6 @@ services:
               capabilities: [gpu]
     command: sleep infinity
     volumes:
-      - ..:/workspace/PROJECT_NAME
+      - ..:/workspace/template_project
       - ${HOST_SSH_FOLDER}:/home/${HOST_USERNAME}/.ssh:ro
       - ${HOST_GITCONFIG_FILE}:/home/${HOST_USERNAME}/.gitconfig:ro

@@ -1,21 +1,30 @@
 [tool.ruff]
-# Core linting + formatting
 line-length = 88
-target-version = ["py39", "py310", "py311", "py312"]
-fix = true
-select = ["ALL"]
-extend-ignore = [
-    "E203",  # Conflicts with line break before ':' in slices (Black style)
-    "W503"   # Line break before binary operator (Black style)
-]
+target-version = "py39"
 src = ["src", "apps", "tests"]
 
-[tool.docformatter]
-# Auto-format docstrings
-wrap-summaries = 88
-pre-summary-newline = true
-make-summary-multi-line = true
-recursive = true
+[tool.ruff.lint]
+select = ["E", "F", "W", "B", "S", "D", "PLR"]
+extend-ignore = [
+    "E203",   # Black-compatible slice formatting
+    "D203",   # Google style: no blank line before class (keep D211)
+    "D212",   # Google style: multi-line summary on second line (keep D213)
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**/*.py" = [
+    "D100", "D101", "D102",  # No docstring requirements in tests
+    "S101",                  # allow assert
+    "S602",                  # shell=True in subprocess (tests only)
+    "PLR2004",               # Magic values in assertions are normal
+]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+
 
 [tool.mypy]
 # Type checking

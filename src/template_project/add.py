@@ -2,7 +2,8 @@
 
 
 def add(a: int, b: int) -> int:
-    """Return the sum of two numbers.
+    """
+    Return the sum of two numbers.
 
     Adds two numbers using internally the '+' operator.
 
@@ -12,6 +13,6 @@ def add(a: int, b: int) -> int:
 
     Returns:
         int: The value 'a+b'
-    """
 
+    """
     return a + b

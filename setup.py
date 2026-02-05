@@ -1,7 +1,9 @@
+"""Docstring for setup."""
+
 from setuptools import find_packages, setup
 
 setup(
-    name="PROJECT_NAME",
+    name="template_project",
     version="0.0.0",
     description="",
     author="",

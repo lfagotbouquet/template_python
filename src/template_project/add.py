@@ -9,7 +9,7 @@ def add(a: int, b: int) -> int:
 
     Args:
         a (int): First added number
-        b (int): Second added numer
+        b (int): Second added number
 
     Returns:
         int: The value 'a+b'
